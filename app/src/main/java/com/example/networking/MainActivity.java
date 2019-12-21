@@ -1,6 +1,7 @@
 package com.example.networking;
 
 import androidx.annotation.MainThread;
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,8 +11,9 @@ import android.os.Bundle;
 
 import com.example.networking.adapter.GithubersAdapter;
 import com.example.networking.model.Githuber;
+import com.example.networking.networking.okhttp.NetworkingWithOkHttp;
+import com.example.networking.networking.retorfit.NetworkingWithRetrofit;
 
-import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(new GithubersAdapter(githubers));
     }
 
+    @WorkerThread
     private List<Githuber> executeRequest() {
-        return Collections.emptyList();
+        return NetworkingWithOkHttp.makeRequest();
+//        return NetworkingWithRetrofit.makeRequest();
     }
 
     private class InternetRequestTask extends AsyncTask<Void, Void, List<Githuber>> {
