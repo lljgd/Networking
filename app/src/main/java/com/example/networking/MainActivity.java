@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     @WorkerThread
     private List<Githuber> executeRequest() {
-        return NetworkingWithOkHttp.makeRequest();
-//        return NetworkingWithRetrofit.makeRequest();
+//        return NetworkingWithOkHttp.makeRequest();
+        return NetworkingWithRetrofit.makeRequest();
     }
 
     private class InternetRequestTask extends AsyncTask<Void, Void, List<Githuber>> {
